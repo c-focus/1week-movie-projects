@@ -1,0 +1,25 @@
+Solid plan. Minimal issues:
+	1.	IMDb access — direct scraping may trigger blocks; add user-agent headers or use IMDbPY API if rate-limited.
+        IMDb’s site blocks or throttles automated scraping.
+
+        Details:
+            •	Their servers detect scripts making frequent or non-browser requests.
+            •	Responses may return HTTP 403 (forbidden) or incomplete HTML.
+            •	Protection is triggered by missing or default headers (e.g. Python’s default User-Agent).
+
+        Solution:
+        Add a fake browser header to each request:
+
+            headers = {
+                "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
+                            "(KHTML, like Gecko) Chrome/124.0 Safari/537.36"
+            }
+            response = requests.get(url, headers=headers)
+
+        If scraping frequently, add small time.sleep() delays or consider imdbpy (official Python interface) to avoid block risk.
+	2.	HTML stability — IMDb DOM changes often; isolate parsing selectors in config/constants.
+	3.	Error handling — include retry logic for failed requests.
+	4.	Data integrity — validate extracted fields before structuring.
+	5.	Testing — mock responses saved locally to avoid live calls during CI runs.
+
+Otherwise clean, realistic, and correctly scoped for a 1-week project.
