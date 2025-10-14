@@ -54,12 +54,22 @@ def main():
 
     # Initialize scraper and history
     if 'scraper' not in st.session_state:
-        st.session_state.scraper = IMDbScraper()
+        # Check for test mode (can be set via environment or UI)
+        test_mode = st.session_state.get('test_mode', False)
+        st.session_state.scraper = IMDbScraper(test_mode=test_mode)
     if 'history' not in st.session_state:
         st.session_state.history = SearchHistory()
 
     # Sidebar with search history
     with st.sidebar:
+        # Test mode toggle
+        test_mode = st.checkbox("🧪 Test Mode (use fake data)", value=st.session_state.get('test_mode', False))
+        if test_mode != st.session_state.get('test_mode', False):
+            st.session_state.test_mode = test_mode
+            # Reinitialize scraper with new mode
+            st.session_state.scraper = IMDbScraper(test_mode=test_mode)
+            st.rerun()
+
         st.header("🔍 Search History")
 
         # Popular searches
