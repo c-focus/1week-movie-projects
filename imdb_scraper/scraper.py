@@ -15,6 +15,7 @@ from .config import (
     MOVIE_SELECTORS, SEARCH_SELECTORS, MIN_REQUEST_DELAY
 )
 from .models import Movie, SearchResult
+from .history import SearchHistory
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
@@ -29,6 +30,7 @@ class IMDbScraper:
         self.session = requests.Session()
         self.session.headers.update(REQUEST_HEADERS)
         self.last_request_time = 0
+        self.history = SearchHistory()
 
     def _rate_limit(self):
         """Implement rate limiting between requests."""
@@ -385,10 +387,14 @@ class IMDbScraper:
         """Search for a movie and return the best match with full details."""
         results = self.search_movies(query, max_results=1)
         if not results:
+            self.history.record_search(query, success=False)
             return None
 
         best_result = results[0]
         if not best_result.imdb_id:
+            self.history.record_search(query, success=False)
             return None
 
-        return self.get_movie_details(best_result.imdb_id)
+        movie = self.get_movie_details(best_result.imdb_id)
+        self.history.record_search(query, success=movie is not None)
+        return movie

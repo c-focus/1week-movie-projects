@@ -4,6 +4,7 @@
 import streamlit as st
 from imdb_scraper.scraper import IMDbScraper
 from imdb_scraper.models import Movie
+from imdb_scraper.history import SearchHistory
 
 
 def display_movie(movie: Movie):
@@ -51,23 +52,89 @@ def main():
     st.title("🎬 IMDb Movie Search")
     st.markdown("Search for movies and get detailed information from IMDb.")
 
-    # Initialize scraper
+    # Initialize scraper and history
     if 'scraper' not in st.session_state:
         st.session_state.scraper = IMDbScraper()
+    if 'history' not in st.session_state:
+        st.session_state.history = SearchHistory()
+
+    # Sidebar with search history
+    with st.sidebar:
+        st.header("🔍 Search History")
+
+        # Popular searches
+        popular = st.session_state.history.get_popular_searches(5)
+        if popular:
+            st.subheader("Popular Searches")
+            for item in popular:
+                if st.button(f"📊 {item['query']} ({item['count']}x)",
+                           key=f"popular_{item['query']}",
+                           help=f"Last searched: {item['last_searched'] or 'Never'}"):
+                    st.session_state.search_input = item['query']
+                    st.rerun()
+
+        # Recent searches
+        recent = st.session_state.history.get_recent_searches(5)
+        if recent:
+            st.subheader("Recent Searches")
+            for item in recent:
+                if st.button(f"🕒 {item['query']}",
+                           key=f"recent_{item['query']}",
+                           help=f"Searched {item['count']} times"):
+                    st.session_state.search_input = item['query']
+                    st.rerun()
+
+        # Stats
+        total_searches = st.session_state.history.get_total_searches()
+        unique_queries = st.session_state.history.get_unique_queries()
+        st.markdown("---")
+        st.markdown(f"**Total searches:** {total_searches}")
+        st.markdown(f"**Unique movies:** {unique_queries}")
 
     # Search input
+    if 'search_input' not in st.session_state:
+        st.session_state.search_input = ""
+
     movie_query = st.text_input(
         "Enter a movie title:",
+        value=st.session_state.search_input,
         placeholder="e.g., The Shawshank Redemption",
         help="Type the name of any movie to search"
     )
 
-    if st.button("🔍 Search Movie", type="primary") and movie_query:
+    # Clear the search input after use
+    if st.session_state.search_input and movie_query != st.session_state.search_input:
+        st.session_state.search_input = ""
+
+    col1, col2 = st.columns([3, 1])
+    with col1:
+        search_clicked = st.button("🔍 Search Movie", type="primary", use_container_width=True)
+    with col2:
+        if st.button("🗑️ Clear History", help="Clear all search history"):
+            st.session_state.history.clear_history()
+            st.success("Search history cleared!")
+            st.rerun()
+
+    if search_clicked and movie_query:
+        # Check if this search exists in history
+        search_stats = st.session_state.history.get_search_stats(movie_query)
+
+        if search_stats:
+            st.info(f"📊 This movie has been searched {search_stats['count']} times before. "
+                   f"Last searched: {search_stats['last_searched'] or 'Unknown'}")
+
         with st.spinner("Searching IMDb..."):
             try:
                 movie = st.session_state.scraper.search_and_get_movie(movie_query)
 
                 if movie:
+                    # Show success with search count
+                    search_count = st.session_state.history.get_search_stats(movie_query)
+                    if search_count and search_count['count'] > 1:
+                        st.success(f"✅ Found '{movie.title}'! (Searched {search_count['count']} times total)")
+                    else:
+                        st.success(f"✅ Found '{movie.title}'!")
+
                     display_movie(movie)
                 else:
                     st.error(f"❌ No movie found for '{movie_query}'. Try a different title or check the spelling.")
