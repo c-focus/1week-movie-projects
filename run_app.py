@@ -63,7 +63,7 @@ def main():
         st.header("🔍 Search History")
 
         # Popular searches
-        popular = st.session_state.history.get_popular_searches(5)
+        popular = [item for item in st.session_state.history.get_popular_searches(5) if item['last_result'] == 'success']
         if popular:
             st.subheader("Popular Searches")
             for item in popular:
@@ -74,7 +74,7 @@ def main():
                     st.rerun()
 
         # Recent searches
-        recent = st.session_state.history.get_recent_searches(5)
+        recent = [item for item in st.session_state.history.get_recent_searches(5) if item['last_result'] == 'success']
         if recent:
             st.subheader("Recent Searches")
             for item in recent:
@@ -136,6 +136,7 @@ def main():
                         st.success(f"✅ Found '{movie.title}'!")
 
                     display_movie(movie)
+                    st.rerun()  # Refresh to update search history sidebar
                 else:
                     st.error(f"❌ No movie found for '{movie_query}'. Try a different title or check the spelling.")
 

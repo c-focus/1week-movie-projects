@@ -1,7 +1,17 @@
 {
   "the matrix": {
+    "count": 2,
+    "last_searched": "2025-10-14T16:08:50.956370",
+    "last_result": "success"
+  },
+  "bing": {
     "count": 1,
-    "last_searched": "2025-10-14T15:19:12.453750",
+    "last_searched": "2025-10-14T16:08:26.452751",
+    "last_result": "failed"
+  },
+  "inception": {
+    "count": 1,
+    "last_searched": "2025-10-14T16:08:35.061618",
     "last_result": "success"
   }
 }

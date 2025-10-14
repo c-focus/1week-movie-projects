@@ -396,5 +396,9 @@ class IMDbScraper:
             return None
 
         movie = self.get_movie_details(best_result.imdb_id)
+        if movie and query.lower() not in movie.title.lower():
+            # Movie title doesn't match query, treat as not found
+            self.history.record_search(query, success=False)
+            return None
         self.history.record_search(query, success=movie is not None)
         return movie

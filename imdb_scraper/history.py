@@ -1,7 +1,6 @@
 """Search history management for IMDb scraper."""
 
 import json
-import os
 from datetime import datetime, timedelta
 from typing import Dict, List, Optional, Any
 from pathlib import Path
