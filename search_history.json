@@ -1,0 +1,27 @@
+{
+  "the matrix": {
+    "count": 4,
+    "last_searched": "2025-10-14T16:17:00.208185",
+    "last_result": "success"
+  },
+  "bing": {
+    "count": 2,
+    "last_searched": "2025-10-14T16:10:21.024159",
+    "last_result": "failed"
+  },
+  "inception": {
+    "count": 4,
+    "last_searched": "2025-10-14T16:16:42.137075",
+    "last_result": "success"
+  },
+  "the shawshank redemption": {
+    "count": 1,
+    "last_searched": "2025-10-14T16:11:51.866038",
+    "last_result": "success"
+  },
+  "nonexistent": {
+    "count": 1,
+    "last_searched": "2025-10-14T16:16:52.874353",
+    "last_result": "failed"
+  }
+}

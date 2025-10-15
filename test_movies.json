@@ -1,0 +1,62 @@
+{
+  "inception": {
+    "title": "Inception",
+    "year": 2010,
+    "rating": 8.8,
+    "runtime": "2h 28m",
+    "genres": ["Action", "Adventure", "Sci-Fi", "Thriller"],
+    "director": "Christopher Nolan",
+    "cast": ["Leonardo DiCaprio", "Joseph Gordon-Levitt", "Elliot Page", "Tom Hardy"],
+    "plot": "A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.",
+    "imdb_id": "tt1375666",
+    "url": "https://www.imdb.com/title/tt1375666/"
+  },
+  "the matrix": {
+    "title": "The Matrix",
+    "year": 1999,
+    "rating": 8.7,
+    "runtime": "2h 16m",
+    "genres": ["Action", "Sci-Fi"],
+    "director": "Lana Wachowski",
+    "cast": ["Keanu Reeves", "Laurence Fishburne", "Carrie-Anne Moss", "Hugo Weaving"],
+    "plot": "When a beautiful stranger leads computer hacker Neo to a forbidding underworld, he discovers the shocking truth--the life he knows is the elaborate deception of an evil cyber-intelligence.",
+    "imdb_id": "tt0133093",
+    "url": "https://www.imdb.com/title/tt0133093/"
+  },
+  "the dark knight": {
+    "title": "The Dark Knight",
+    "year": 2008,
+    "rating": 9.1,
+    "runtime": "2h 32m",
+    "genres": ["Action", "Crime", "Drama", "Thriller"],
+    "director": "Christopher Nolan",
+    "cast": ["Christian Bale", "Heath Ledger", "Aaron Eckhart", "Michael Caine"],
+    "plot": "When the menace known as the Joker wreaks havoc and chaos on the people of Gotham, Batman must accept one of the greatest psychological and physical tests of his ability to fight injustice.",
+    "imdb_id": "tt0468569",
+    "url": "https://www.imdb.com/title/tt0468569/"
+  },
+  "interstellar": {
+    "title": "Interstellar",
+    "year": 2014,
+    "rating": 8.7,
+    "runtime": "2h 49m",
+    "genres": ["Adventure", "Drama", "Sci-Fi"],
+    "director": "Christopher Nolan",
+    "cast": ["Ellen Burstyn", "Matthew McConaughey", "Mackenzie Foy", "John Lithgow"],
+    "plot": "A team of explorers travel through a wormhole in space in an attempt to ensure humanity's survival.",
+    "imdb_id": "tt0816692",
+    "url": "https://www.imdb.com/title/tt0816692/"
+  },
+  "shawshank": {
+    "title": "The Shawshank Redemption",
+    "year": 1994,
+    "rating": 9.3,
+    "runtime": "2h 22m",
+    "genres": ["Drama"],
+    "director": "Frank Darabont",
+    "cast": ["Tim Robbins", "Morgan Freeman", "Bob Gunton", "William Sadler"],
+    "plot": "Two imprisoned men bond over a number of years, finding solace and eventual redemption through acts of common decency.",
+    "imdb_id": "tt0111161",
+    "url": "https://www.imdb.com/title/tt0111161/"
+  }
+}

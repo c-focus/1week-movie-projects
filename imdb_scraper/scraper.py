@@ -15,6 +15,7 @@ from .config import (
     MOVIE_SELECTORS, SEARCH_SELECTORS, MIN_REQUEST_DELAY
 )
 from .models import Movie, SearchResult
+from .history import SearchHistory
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
@@ -24,11 +25,30 @@ logger = logging.getLogger(__name__)
 class IMDbScraper:
     """IMDb scraper with anti-bot protection and error handling."""
 
-    def __init__(self):
-        """Initialize scraper with session management."""
-        self.session = requests.Session()
-        self.session.headers.update(REQUEST_HEADERS)
-        self.last_request_time = 0
+    def __init__(self, test_mode: bool = False):
+        """Initialize scraper with session management.
+
+        Args:
+            test_mode: If True, use test data instead of scraping IMDb
+        """
+        self.test_mode = test_mode
+        if test_mode:
+            self.test_data = self._load_test_data()
+        else:
+            self.session = requests.Session()
+            self.session.headers.update(REQUEST_HEADERS)
+            self.last_request_time = 0
+        self.history = SearchHistory()
+
+    def _load_test_data(self) -> dict:
+        """Load test movie data from file."""
+        import json
+        from pathlib import Path
+        test_file = Path(__file__).parent.parent / "test_movies.json"
+        if test_file.exists():
+            with open(test_file, 'r', encoding='utf-8') as f:
+                return json.load(f)
+        return {}
 
     def _rate_limit(self):
         """Implement rate limiting between requests."""
@@ -383,12 +403,32 @@ class IMDbScraper:
 
     def search_and_get_movie(self, query: str) -> Optional[Movie]:
         """Search for a movie and return the best match with full details."""
+        if self.test_mode:
+            # Use test data
+            query_lower = query.lower()
+            if query_lower in self.test_data:
+                data = self.test_data[query_lower]
+                movie = Movie(**data)
+                self.history.record_search(query, success=True)
+                return movie
+            else:
+                self.history.record_search(query, success=False)
+                return None
+
         results = self.search_movies(query, max_results=1)
         if not results:
+            self.history.record_search(query, success=False)
             return None
 
         best_result = results[0]
         if not best_result.imdb_id:
+            self.history.record_search(query, success=False)
             return None
 
-        return self.get_movie_details(best_result.imdb_id)
+        movie = self.get_movie_details(best_result.imdb_id)
+        if movie and query.lower() not in movie.title.lower():
+            # Movie title doesn't match query, treat as not found
+            self.history.record_search(query, success=False)
+            return None
+        self.history.record_search(query, success=movie is not None)
+        return movie
