@@ -52,6 +52,9 @@ streamlit run run_app.py
 
 Then open your browser to the displayed URL (usually http://localhost:8501) and start searching for movies!
 
+**Test Mode:**
+Toggle test mode in the sidebar to use fake movie data for development and testing.
+
 ## Extracted Movie Information
 
 - Title and release year

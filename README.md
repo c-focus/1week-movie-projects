@@ -15,6 +15,8 @@ A robust web scraper that searches IMDb and extracts detailed movie information 
 - 🛡️ Anti-bot protection with rate limiting
 - 🎨 Web interface (Streamlit) and CLI
 - 🔄 Error handling and retry logic
+- 🧪 Test mode with fake data for development
+- 📈 Search history and caching
 
 ### 🎤 **Speech Cleanup AI** (Coming Soon)
 AI-powered text cleanup for speech-to-text transcripts with grammar correction and tone adjustment.
@@ -45,6 +47,9 @@ pip install -r requirements.txt
 python3 -m streamlit run run_app.py
 ```
 Open http://localhost:8501 in your browser
+
+**Test Mode:**
+Enable test mode in the sidebar for development with fake movie data.
 
 **Command Line:**
 ```bash
@@ -132,6 +137,7 @@ Build and run with Docker:
 docker build -t movie-projects .
 docker run -p 8501:8501 movie-projects
 ```
+The app will be accessible at http://localhost:8501
 
 ## 📊 Current Status
 
@@ -141,9 +147,10 @@ docker run -p 8501:8501 movie-projects
 - Web and CLI interfaces
 - Professional code structure and documentation
 - GitHub repository with proper branching
+- UI improvements (test mode, search history, enhanced UX)
+- Docker containerization
 
 ### 🔄 **In Progress**
-- UI improvements (see [Issues](#issues))
 - Enhanced search features
 - Better error handling display
 

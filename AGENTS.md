@@ -13,3 +13,5 @@
 - **Naming**: snake_case functions/vars, PascalCase classes, UPPER_SNAKE_CASE constants
 - **Error Handling**: Specific exceptions, log with context, early returns
 - **Testing**: Test public functions, descriptive names, mock dependencies
+
+Ensure that I don't deviate from prompt_engineering.md and stop and ask me for clarifications.

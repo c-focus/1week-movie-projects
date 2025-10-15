@@ -20,17 +20,33 @@ The goal is to **learn core tools** (Docker, GitHub, automation, documentation) 
 
 ---
 
+## 🔄 Workflow Preferences
+- **Parallel Development**: Multiple branches and PRs simultaneously (don't wait for completion)
+- **Self-Review Process**: Fast iteration as repository owner with self-review and merge
+- **Proactive AI Guidance**: Need suggestions for next steps and workflow optimization
+- **Learning-Focused**: Balance building features with understanding tools and processes
+
+---
+
 ## 📦 Current Projects
 ### 1. IMDb Scraper
-**Status:** Active  
-**Purpose:** Build a data scraper for IMDb movie information (titles, ratings, years).  
+**Status:** Advanced Development (PR #6 Ready)
+**Purpose:** Build a data scraper for IMDb movie information (titles, ratings, years).
 **Skills Focus:** Requests, BeautifulSoup, data structuring, Docker containerization, GitHub workflow.
 
+**Current Progress**
+- ✅ Core scraper implemented with search and movie detail extraction
+- ✅ Streamlit web interface with movie display
+- ✅ Test mode with fake movie data
+- ✅ Search validation and history tracking
+- ✅ GitHub repo setup with professional workflow
+- 🔄 PR #6 pending review (UI improvements, test mode, validation)
+
 **Next Steps**
-- Set up GitHub repo with README, .gitignore, and issue templates.  
-- Write scraper base script.  
-- Add Dockerfile for containerized execution.  
-- Push, commit, and test GitHub workflow.
+- Review and merge PR #6
+- Add Dockerfile for containerized execution
+- Set up CI/CD pipeline with GitHub Actions
+- Add comprehensive test coverage
 
 ---
 
@@ -46,7 +62,8 @@ The goal is to **learn core tools** (Docker, GitHub, automation, documentation) 
 
 ## ⚙️ Environment
 - **Docker:** Python 3.11-slim (main base)
-- **GitHub Repo:** [To be created]
+- **GitHub Repo:** ✅ https://github.com/c-focus/1week-movie-projects
+- **Current Branch:** feature/ui-improvements (PR #6)
 - **Editor:** [to be decided]
 - **OS:** macOS
 - **Optional Tools:** n8n, Apple Calendar integration (later automation task)
@@ -71,7 +88,13 @@ The goal is to **learn core tools** (Docker, GitHub, automation, documentation) 
 	    • Next: containerize and push to GitHub
 4. **AI Use**
 - Use this document at the start of every chat to sync context.
-- Add “Updated” date after each edit.
+- Add "Updated" date after each edit.
+
+5. **AI Context Maintenance**
+- Reference PROJECT_CONTEXT.md for workflow preferences and learning goals
+- Update document after major decisions or process changes
+- Include current blockers and parallel development streams
+- Maintain continuity across sessions to avoid repetition
 
 ---
 
@@ -87,11 +110,13 @@ The goal is to **learn core tools** (Docker, GitHub, automation, documentation) 
 ---
 
 ## 🚧 Pending / Open Items
-- [ ] Create GitHub repo for IMDb Scraper  
-- [ ] Create Dockerfile for IMDb Scraper  
-- [ ] Set up basic `README.md`  
-- [ ] Collect sample data for Speech Cleanup AI  
-- [ ] Create LanguageTool test script  
+- [ ] Review and merge PR #6 (IMDb scraper UI improvements)
+- [ ] Create Dockerfile for IMDb Scraper containerization
+- [ ] Set up GitHub Actions CI/CD pipeline
+- [ ] Add comprehensive test coverage (pytest)
+- [ ] Create issue templates and PR templates
+- [ ] Collect sample data for Speech Cleanup AI
+- [ ] Create LanguageTool test script
 - [ ] Write `docs/daily_log.md` template  
 
 ---
@@ -103,4 +128,4 @@ The goal is to **learn core tools** (Docker, GitHub, automation, documentation) 
 
 ---
 
-_Last updated: [Oct 14, 2025]_
+_Last updated: [Oct 14, 2025] - Updated with current progress, workflow preferences, and AI context guidelines_
